@@ -1,57 +1,25 @@
 ﻿using System;
 
-namespace FactoryPatternApp
+namespace FactoryPattern
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            //Ask the user for the phone they wish to create
-            Console.WriteLine("What kind of phone do you want to create?");
-            string userPhone = Console.ReadLine();
+            int numOfWheels;
+            bool input = false;
 
-            //Choose the correct type of phone to create through the factory method that implements the ICallable interface
-            ICallable phone = PhoneFactory.GetPhone(userPhone);
-            phone.Build();
-            Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Enter the amount of tires for the vehicle you want to create:");
 
 
+                input = int.TryParse(Console.ReadLine(), out numOfWheels);
 
-            //***********Example of bad practice************//
+            } while (input == false);
 
-            //Console.WriteLine("What kind of phone do you want to create?");
-            //string userPhone = Console.ReadLine();
-
-            //if (userPhone.ToLower() == "android")
-            //{
-            //    AndroidPhone android = new AndroidPhone();
-            //    android.Build();
-            //    Console.ReadLine();
-            //}
-            //else if (userPhone.ToLower() == "apple")
-            //{
-            //    ApplePhone apple = new ApplePhone();
-            //    apple.Build();
-            //    Console.ReadLine();
-            //}
-            //else if (userPhone.ToLower() == "iphone")
-            //{
-            //    ApplePhone apple = new ApplePhone();
-            //    apple.Build();
-            //    Console.ReadLine();
-            //}
-            //else if (userPhone.ToLower() == "google")
-            //{
-            //    GooglePhone google = new GooglePhone();
-            //    google.Build();
-            //    Console.ReadLine();
-            //}
-            //else
-            //{
-            //    AndroidPhone android = new AndroidPhone();
-            //    android.Build();
-            //    Console.ReadLine();
-            //}
+            var vehicle = VehicleFactory.GetVehicle(numOfWheels);
+            vehicle.Drive();
         }
     }
 }
